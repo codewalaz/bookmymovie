@@ -114,20 +114,22 @@ showtime id. This showtime id should be used by the UI to check availability of 
 
 Sample response with 2 showtimes. The UI can aggregate this response to show as a Tree: movies -> screenName -> showtimes or this can
 be done in the backend as well. This is a TODO given that UI integration is not done.
-[
-    {
-        "_id": "5c299ea40588293bf6d08970",
-        "movieName": "spiderman - into the verse",
-        "screenName": "pvr matrix screen1",
-        "showStartTime": 1546259400000
-    },
-    {
-        "_id": "5c299ec70588293bf6d0897b",
-        "movieName": "spiderman - into the verse",
-        "screenName": "pvr matrix screen1",
-        "showStartTime": 1546432200000
-    }
-]
+{
+	[
+	    {
+		"_id": "5c299ea40588293bf6d08970",
+		"movieName": "spiderman - into the verse",
+		"screenName": "pvr matrix screen1",
+		"showStartTime": 1546259400000
+	    },
+	    {
+		"_id": "5c299ec70588293bf6d0897b",
+		"movieName": "spiderman - into the verse",
+		"screenName": "pvr matrix screen1",
+		"showStartTime": 1546432200000
+	    }
+	]
+}
 
 4E. Fetch tickets for a showtime - GET on bookmymovie/v1/showtime/tickets?showid=<showId>
 The Web UI can call this API post calling the "Fetch showtimes" (see 4D) to fetch all tickets for the given showtime. Using this API,
@@ -157,7 +159,7 @@ Sample response:
             "seatRowNum": 1,
             "seatNumInRow": 2,
             "ticketIndex": "1"
-        } ...
+        }
       ]
 }
 
@@ -177,15 +179,17 @@ After a customer has booked tickets, the UI can call this API to display showtim
 
 Sample request: bookmymovie/v1/showtime/customerbookings?customerId=ravi.kumar@yahoo.com&city=bangalore
 Sample response:
-[
-    {
-        "_id": "5c29d4fdc3c87f3d30323827",
-        "movieName": "spiderman - into the verse",
-        "screenName": "pvr matrix screen1",
-        "movieLanguage": "english",
-        "showStartTime": 1546259400000
-    }
-]
+{
+	[
+	    {
+		"_id": "5c29d4fdc3c87f3d30323827",
+		"movieName": "spiderman - into the verse",
+		"screenName": "pvr matrix screen1",
+		"movieLanguage": "english",
+		"showStartTime": 1546259400000
+	    }
+	]
+}
 
 The  customer ravi.kumar@yahoo.com has booked on movie "spiderman - into the verse" in Bangalore at 1546259400000(this is the
 UTC timestamp that the UI can convert to a suitable human readable format. 5c29d4fdc3c87f3d30323827 is the unique showtime id.
