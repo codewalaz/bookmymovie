@@ -1,0 +1,30 @@
+{
+  "name": "bookmymovie",
+  "version": "1.0.0",
+  "description": "Book your favorite movies",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/codewalaz/bookmymovie.git"
+  },
+  "keywords": [
+    "node.js"
+  ],
+  "author": "Brijai Sudarsan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/codewalaz/bookmymovie/issues"
+  },
+  "homepage": "https://github.com/codewalaz/bookmymovie#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "mongodb": "^3.1.10",
+    "mongoose": "^5.4.1",
+    "nodemon": "^1.18.9",
+    "uuid": "^3.3.2"
+  }
+}
