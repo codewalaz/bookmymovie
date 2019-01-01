@@ -3,12 +3,10 @@ Book your favorite movies
 
 bookmymovie is a REST based web application that can be used by customers to book a movie online. Any available movie can be booked from the city of your choice.
 
-=========================================
 bookmymovie Web Application Specification
-=========================================
 
 1. Introduction
-===============
+
 bookmymovie is a REST application that has the following features:
 
   a. Register(add) a newly released movie. This is done only once when a movie is released.
@@ -21,8 +19,8 @@ bookmymovie is a REST application that has the following features:
   tickets for a given showtime.
 
 
-  Assumptions
-  ===========
+2. Assumptions
+  
   As this is an initial prototype of the bookmymovie application, certain assumptions have been made to simplify the
   implementation and to focus on the main use case of showtime bookings by customers. The code is however is not
   temporary and can be easily extended to a full fledged production grade application.
@@ -39,8 +37,8 @@ bookmymovie is a REST application that has the following features:
   7. The application has been locally tested and has not been tested in the cloud but with a little more effort can be deployed
   on a cloud.
 
-  Technology stack
-  ================
+3.0  Technology stack
+  
   The backend is developed in Node.js and Mongodb. The UI although not implemented can be developed using AngularJs or similar UI
   frameworks. Multiple technologies were evaluated - Java Springboot, Java Jersey with Weblogic or Tomcat,
   Google Go and Node.js for the application server and MongoDb for noSql and MariaDB and MySql for sql.
@@ -56,13 +54,13 @@ bookmymovie is a REST application that has the following features:
   is so easier to integrate with the UI layer.
 
 
-2. bookmymovie REST APIs
-=======================
+4. bookmymovie REST APIs
+
 
 The backend supports 9 REST APIs that the UI can call for the bookmymovie application. Please see sections 2A to 2I
 for details.
 
-2A. Movie registration - POST on bookmymovie/v1/movie
+4A. Movie registration - POST on bookmymovie/v1/movie
 A newly released movie can registered using this API. This is usually a
 one time activity for a movie when it is launched. For details, please check mongoose schema defined in models/movie.js.
 
@@ -81,7 +79,7 @@ Sample request payload:
 }
 
 
-2B. Screen registration - POST on bookmymovie/v1/screen
+4B. Screen registration - POST on bookmymovie/v1/screen
 Registers a newly launched screen (movie hall). This is usually a one time activity when a new movie hall or mall showing
 movies comes up in a city. For details, please check mongoose schema defined in models/screen.js
 
@@ -98,7 +96,7 @@ Sample request payload:
 
 A screen is stored in the SCREENS collection.
 
-2C. Showtime registration - POST on bookmymovie/v1/showtime
+4C. Showtime registration - POST on bookmymovie/v1/showtime
 Registers a showtime for a movie at a screen (movie hall) at a given time. Tickets are also generated as part of the
 showtime registration for each seat in the movie hall. All tickets are in state AVAILABLE when a showtime is registered.
 Schema details are defined in models/showtime.js.
@@ -108,7 +106,7 @@ is correctly registered using a valid movie (including other details like valid 
 
 A showtime is stored in the SHOWTIMES collection.
 
-2D. Fetch showtimes - GET on bookmymovie/v1/showtime?city=<city>&language=<lang>
+4D. Fetch showtimes - GET on bookmymovie/v1/showtime?city=<city>&language=<lang>
 The Web UI can call this API to fetch all running movies in a city for a specific language. The API does not support
 all languages for the first prototype but it should be quite easy to make the language param optional. This API queries
 the SHOWTIMES collection for all shows from current time till the next 7 days and returns the movie list along with a unique
@@ -131,8 +129,8 @@ be done in the backend as well. This is a TODO given that UI integration is not 
     }
 ]
 
-2E. Fetch tickets for a showtime - GET on bookmymovie/v1/showtime/tickets?showid=<showId>
-The Web UI can call this API post calling the "Fetch showtimes" (see 2D) to fetch all tickets for the given showtime. Using this API,
+4E. Fetch tickets for a showtime - GET on bookmymovie/v1/showtime/tickets?showid=<showId>
+The Web UI can call this API post calling the "Fetch showtimes" (see 4D) to fetch all tickets for the given showtime. Using this API,
 the UI can show the seats that are AVAILABLE and others that are RESERVED.
 
 Sample response:
@@ -163,8 +161,8 @@ Sample response:
       ]
 }
 
-2F. Book tickets - PUT on bookmymovie/v1/showtime/book
-Once the user has selected the seats to book from "Fetch tickets for a showtime" (see 2E) on the UI, this API can be
+4F. Book tickets - PUT on bookmymovie/v1/showtime/book
+Once the user has selected the seats to book from "Fetch tickets for a showtime" (see 4E) on the UI, this API can be
 called to book tickets. The API will check if the requested tickets are available, and if available, book the tickets
 (mark tickets are RESERVED).
 
@@ -174,7 +172,7 @@ updateOne({{transactionId : currTransactionId}}) API where currTransactionId is 
 request before trying an update. If another request has done an update, the transactionId would have changed and the requested
 will need to re-read the document and retry the update till it succeeds.
 
-2G. Fetch booked shows for a customer  - GET on bookmymovie/v1/showtime/customerbookings?customerId=<customerId>&city=<city>
+4G. Fetch booked shows for a customer  - GET on bookmymovie/v1/showtime/customerbookings?customerId=<customerId>&city=<city>
 After a customer has booked tickets, the UI can call this API to display showtimes for a customer in a city.
 
 Sample request: bookmymovie/v1/showtime/customerbookings?customerId=ravi.kumar@yahoo.com&city=bangalore
@@ -192,7 +190,7 @@ Sample response:
 The  customer ravi.kumar@yahoo.com has booked on movie "spiderman - into the verse" in Bangalore at 1546259400000(this is the
 UTC timestamp that the UI can convert to a suitable human readable format. 5c29d4fdc3c87f3d30323827 is the unique showtime id.
 
-2H. Fetch booked tickets for customer - GET on bookmymovie/v1/showtime/customertickets?customerId=<customerId>&showId=<showId>
+4H. Fetch booked tickets for customer - GET on bookmymovie/v1/showtime/customertickets?customerId=<customerId>&showId=<showId>
 After the UI displays the shows for a customer, the customer can choose to see tickets for a show using this API.
 
 Sample request: bookmymovie/v1/showtime/customertickets?customerId=ravi.kumar@yahoo.com&showId=5c29d4fdc3c87f3d30323827
@@ -229,9 +227,9 @@ Sample response:
 The customer ravi.kumar@yahoo.com has booked 2 tickets for the movie "spiderman - into the verse" at "pvr matrix screen1"
 on "Mon, 31 Dec 2018 12:30:00 GMT".
 
-2I. Cancel tickets - PUT on bookmymovie/v1/showtime/cancel
+4I. Cancel tickets - PUT on bookmymovie/v1/showtime/cancel
 The user can cancel tickets using this API. Prior to calling this API, the UI should call
-"Fetch booked tickets for customer" (see 2H) to get the list of tickets booked by a customer and send a subset of that for
+"Fetch booked tickets for customer" (see 4H) to get the list of tickets booked by a customer and send a subset of that for
 cancellation as payload to this API.
 
 Sample request:
@@ -265,5 +263,5 @@ Sample request:
     ]
 }
 
-The cancel flow also does not use locks and uses similar logic as the booking flow (see 2F).
+The cancel flow also does not use locks and uses similar logic as the booking flow (see 4F).
 
